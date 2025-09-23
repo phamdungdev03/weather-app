@@ -9,5 +9,5 @@ const WeatherDashboard = () => {
         </div>
     )
 }
-
+ 
 export default WeatherDashboard;
