@@ -6,6 +6,7 @@ import HourlyForecast from "./hourly-forecast";
 import { useMemo } from "react";
 import AirPollutionChart from "./air-pollution";
 import TemperatureHumidityChart from "./temp-humidity";
+import DayDuration from "./day-duration";
 
 interface WeatherDashboardProps {
     weatherData: WeatherData;
@@ -43,6 +44,7 @@ const WeatherDashboard: React.FC<WeatherDashboardProps> = ({ weatherData, unit }
 
                 <AirPollutionChart airPrllution={airPollution}/>
                 <TemperatureHumidityChart data={forecast} unit={unit}/>
+                <DayDuration data={currentWeather}/>
             </div>
         </div>
     )
