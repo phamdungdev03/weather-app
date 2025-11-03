@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import AirPollutionChart from "./air-pollution";
 import TemperatureHumidityChart from "./temp-humidity";
 import DayDuration from "./day-duration";
+import ClientMap from "./client-map";
 
 interface WeatherDashboardProps {
     weatherData: WeatherData;
@@ -45,6 +46,12 @@ const WeatherDashboard: React.FC<WeatherDashboardProps> = ({ weatherData, unit }
                 <AirPollutionChart airPrllution={airPollution}/>
                 <TemperatureHumidityChart data={forecast} unit={unit}/>
                 <DayDuration data={currentWeather}/>
+                <ClientMap
+                    center={[currentWeather.coord.lat, currentWeather.coord.lon]}
+                    zoom={10}
+                    markerPosition={[currentWeather.coord.lat, currentWeather.coord.lon]}
+                    popupContent={`${currentWeather.name}, ${currentWeather.sys.country}`}
+                />
             </div>
         </div>
     )

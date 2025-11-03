@@ -9,7 +9,7 @@ export default function Home() {
   const { weatherData } = useOptimizedWeather();
   
   return (
-    <div className="min-h-screen flex flex-col gap-6">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
        {weatherData && <WeatherDashboard weatherData={weatherData} unit={unit} />} 
     </div>
