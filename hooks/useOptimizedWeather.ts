@@ -1,13 +1,20 @@
 import { weatherAPI } from "@/lib/api"
-import { useCoordinates, useWeatherData, useWeatherStore } from "@/lib/store";
+import { useCoordinates, useError, useLoading, useWeatherData, useWeatherStore } from "@/lib/store";
 import React, { useCallback, useEffect, useRef } from "react";
+import { useGeolocation } from "./useGeolocation";
 
 export const useOptimizedWeather = () => {
     const weatherData = useWeatherData();
     const coordinates = useCoordinates();
     const { setWeatherData } = useWeatherStore();
-
+    const isLoading = useLoading()
+    const error = useError()
     const abortControllerRef = useRef<AbortController | null>(null);
+
+    const geolocation = useGeolocation({
+        timeout: 5000,
+        enabled: useWeatherStore.getState().geolocationEnabled,
+    });
 
     const { setError } = useWeatherStore();
 
@@ -67,6 +74,8 @@ export const useOptimizedWeather = () => {
 
     return {
         weatherData,
+        isLoading: isLoading || geolocation.loading,
+        error: error || geolocation.error,
         refetch: () => fetchWeatherData(coordinates),
     }
 }

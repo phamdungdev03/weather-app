@@ -131,3 +131,8 @@ export const useWeatherStore = create<WeatherState>()(
 
 export const useCoordinates = () => useWeatherStore((state) => state.coordinates);
 export const useWeatherData = () => useWeatherStore((state) => state.weatherData);
+export const useSearchQuery = () => useWeatherStore((state) => state.searchQuery);
+export const useCitySuggestions = () => useWeatherStore((state) => state.citySuggestions);
+export const useIsSearching = () => useWeatherStore((state) => state.isSearching);
+export const useLoading = () => useWeatherStore((state) => state.isLoading);
+export const useError = () => useWeatherStore((state) => state.error);
