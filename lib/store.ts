@@ -128,3 +128,6 @@ export const useWeatherStore = create<WeatherState>()(
         },
     ),
 )
+
+export const useCoordinates = () => useWeatherStore((state) => state.coordinates);
+export const useWeatherData = () => useWeatherStore((state) => state.weatherData);

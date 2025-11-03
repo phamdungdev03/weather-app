@@ -4,7 +4,7 @@ import { error } from 'console';
 
 // API Configuration: API key and base URL for OpenWeatherMap
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
-const BASE_URL = process.env.NEXT_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // Cache configuration: store weather and city data for 5 minutes to avoid unnecessary API calls
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -127,3 +127,5 @@ export class WeatherAPI {
         return new Error('An unexpected error occurred');
     }
 }
+
+export const weatherAPI = WeatherAPI.getInstance(); 
