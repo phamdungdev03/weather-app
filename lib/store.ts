@@ -99,26 +99,57 @@ export const useWeatherStore = create<WeatherState>()(
 
             // triggerCurrentLocation: enables geolocation and resets manual selection and search state.
             triggerCurrentLocation: () => {
-                set({
-                isManualSelection: false,
-                geolocationEnabled: true,
-                hasInitialLoad: true,
-                searchQuery: '',
-                citySuggestions: [],
-                error: null,
-                });
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        const { latitude, longitude } = pos.coords;
+                        set({
+                            showLocationDialog: false,
+                            geolocationEnabled: true,
+                            isManualSelection: false,
+                            hasInitialLoad: true,
+                            coordinates: { lat: latitude, lon: longitude },
+                            error: null,
+                        });;
+                    },
+                )
             },
 
             // handleLocationPermission: updates state based on user permission for geolocation.
             handleLocationPermission: (allow) => {
+            if (allow) {
+                navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const { latitude, longitude } = pos.coords;
+                    set({
+                        showLocationDialog: false,
+                        geolocationEnabled: true,
+                        isManualSelection: false,
+                        hasInitialLoad: true,
+                        coordinates: { lat: latitude, lon: longitude },
+                        error: null,
+                    });
+                },
+                (err) => {
+                    console.error("❌ Failed to get geolocation:", err);
+                    set({
+                        showLocationDialog: false,
+                        geolocationEnabled: false,
+                        isManualSelection: true,
+                        hasInitialLoad: true,
+                        coordinates: DEFAULT_COORDINATES,
+                        error: err.message,
+                    });
+                }
+                );
+            } else {
                 set({
                 showLocationDialog: false,
-                geolocationEnabled: allow,
-                isManualSelection: !allow,
+                geolocationEnabled: false,
+                isManualSelection: true,
                 hasInitialLoad: true,
-                coordinates: allow ? get().coordinates : DEFAULT_COORDINATES,
+                coordinates: DEFAULT_COORDINATES,
                 });
-            },
+            }},
 
             // reset: resets the store to its initial state.
             reset: () => set(initialState),

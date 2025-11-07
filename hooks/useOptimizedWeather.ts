@@ -70,7 +70,7 @@ export const useOptimizedWeather = () => {
 
     useEffect(() => {
         fetchWeatherData(debouncedCoordinates);
-    }, [fetchWeatherData]);
+    }, [fetchWeatherData, debouncedCoordinates]);
 
     return {
         weatherData,

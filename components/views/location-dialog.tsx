@@ -1,7 +1,6 @@
 import React from 'react';
 import { MapPin, Navigation, AlertCircle } from 'lucide-react';
-import { DialogTitle, Dialog, DialogContent } from '@radix-ui/react-dialog';
-import { DialogFooter, DialogHeader } from '../ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 
 

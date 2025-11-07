@@ -176,6 +176,7 @@ export const useOptimizedSearch = () => {
       setSearchQuery(`${city.name}, ${city.country}`);
       setSelectedIndex(-1);
       setError(null);
+      clearSearch(); 
     },
     [setSearchQuery],
   );
