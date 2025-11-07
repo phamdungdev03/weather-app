@@ -94,9 +94,9 @@ const AirPollutionChart: React.FC<AirPollutionChartProps> = ({airPrllution}) => 
           <div className="flex flex-col items-center">
             <div className="flex justify-center items-center">
               <div className="p-2">
-                  <Cloudy className="h-5 w-5 text-blue-600" />
+                  <Cloudy className="h-5 w-5 text-green-500" />
               </div>
-              <h2 className="font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              <h2 className="font-bold bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent">
                 Air Pollution
               </h2>
             </div>

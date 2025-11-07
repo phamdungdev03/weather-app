@@ -113,6 +113,67 @@ export class WeatherAPI {
         }
     }
 
+    async searchCities(query: string, signal?: AbortSignal): Promise<City[]> {
+        // Minimum query length check
+        if (!query || query.trim().length < 3) {
+        return [];
+        }
+
+        const cacheKey = `cities-${query}`;
+
+        // Check cache first
+        const cached = cityCache.get(cacheKey);
+        if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        return cached.data;
+        }
+
+        // Check for pending request
+        if (pendingCityRequests.has(cacheKey)) {
+        return pendingCityRequests.get(cacheKey)!;
+        }
+
+        // Create new request
+        const request = this.api
+        .get('/find', {
+            params: {
+            q: query,
+            type: 'like',
+            sort: 'population',
+            cnt: 5,
+            appid: API_KEY,
+            },
+            signal,
+        })
+        .then((response) => {
+            const cities: City[] = response.data.list.map(
+            (city: {
+                name: string;
+                sys: { country: string };
+                coord: { lat: number; lon: number };
+            }) => ({
+                name: city.name,
+                country: city.sys.country,
+                lat: city.coord.lat,
+                lon: city.coord.lon,
+            }),
+            );
+
+            // Cache the result
+            cityCache.set(cacheKey, { data: cities, timestamp: Date.now() });
+            return cities;
+        });
+
+        // Store pending request
+        pendingCityRequests.set(cacheKey, request);
+
+        try {
+            return await request;
+        } catch (error) {
+            pendingCityRequests.delete(cacheKey);
+            throw this.handleError(error);
+        }
+    }
+
     private handleError(error: unknown): Error {
         if (error instanceof Error && error.name === 'AbortError') {
         return error;

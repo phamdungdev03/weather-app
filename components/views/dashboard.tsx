@@ -31,7 +31,7 @@ const WeatherDashboard: React.FC<WeatherDashboardProps> = ({ weatherData, unit }
     
     return (
         <div className="bg-inherit min-h-screen flex flex-col">
-            <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[30%_40%_auto] gap-4 p-4">
                 <CurrentWeatherCard
                     currentWeather={currentWeather}
                     forecast={forecast}
@@ -43,9 +43,9 @@ const WeatherDashboard: React.FC<WeatherDashboardProps> = ({ weatherData, unit }
                     <HourlyForecast forecast={hourlyForecastData} unit={unit}/>
                 </div>
 
-                <AirPollutionChart airPrllution={airPollution}/>
-                <TemperatureHumidityChart data={forecast} unit={unit}/>
                 <DayDuration data={currentWeather}/>
+                <TemperatureHumidityChart data={forecast} unit={unit}/>
+                <AirPollutionChart airPrllution={airPollution}/>
                 <ClientMap
                     center={[currentWeather.coord.lat, currentWeather.coord.lon]}
                     zoom={10}
