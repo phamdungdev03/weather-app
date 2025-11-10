@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { DEFAULT_COORDINATES } from "@/constants";
-import { Coordinates, WeatherData } from "@/types/weather";
+import { Coordinates, WeatherData, WeatherForecastData } from "@/types/weather";
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 interface WeatherState {
     // Core state: stores the user's coordinates and fetched weather data.
     coordinates: Coordinates;
     weatherData: WeatherData | null;
+    weatherForecastData: WeatherForecastData | null;
     unit: 'metric' | 'imperial';
 
     // UI state: controls loading, error, dialogs, and selection flags.
@@ -25,6 +26,7 @@ interface WeatherState {
     // Actions: functions to update state.
     setCoordinates: (coords: Coordinates) => void;
     setWeatherData: (data: WeatherData | null) => void;
+    setForecastData: (data: any) => void; // Forecast data setter
     setLoading: (loading: boolean) => void;
     setError: (error: string | null) => void;
     setLocationDialog: (show: boolean) => void;
@@ -47,6 +49,7 @@ interface WeatherState {
 const initialState = {
   coordinates: DEFAULT_COORDINATES,
   weatherData: null,
+  weatherForecastData: null,
   unit: 'metric' as const,
   isLoading: false,
   error: null,
@@ -68,6 +71,7 @@ export const useWeatherStore = create<WeatherState>()(
             // Simple setters for updating state fields.
             setCoordinates: (coords) => set({ coordinates: coords }),
             setWeatherData: (data) => set({ weatherData: data }),
+            setForecastData: (forecastData) => set({ weatherForecastData: forecastData }), 
             setLoading: (loading) => set({ isLoading: loading }),
             setError: (error) => set({ error }),
             setLocationDialog: (show) => set({ showLocationDialog: show }),
@@ -162,6 +166,7 @@ export const useWeatherStore = create<WeatherState>()(
 
 export const useCoordinates = () => useWeatherStore((state) => state.coordinates);
 export const useWeatherData = () => useWeatherStore((state) => state.weatherData);
+export const useWeatherForecastData = () => useWeatherStore((state) => state.weatherForecastData);
 export const useSearchQuery = () => useWeatherStore((state) => state.searchQuery);
 export const useCitySuggestions = () => useWeatherStore((state) => state.citySuggestions);
 export const useIsSearching = () => useWeatherStore((state) => state.isSearching);

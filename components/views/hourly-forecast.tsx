@@ -63,15 +63,15 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast, unit }) => {
   const getWeatherGradient = useCallback((weather: string) => {
     switch (weather.toLowerCase()) {
       case 'clear':
-        return 'from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20';
+        return 'from-amber-50 to-orange-50';
       case 'clouds':
-        return 'from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20';
+        return 'from-gray-50 to-slate-50';
       case 'rain':
-        return 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20';
+        return 'from-blue-50 to-cyan-50';
       case 'snow':
-        return 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20';
+        return 'from-blue-50 to-indigo-50';
       default:
-        return 'from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20';
+        return 'from-amber-50 to-orange-50';
     }
   }, []);
 
@@ -97,7 +97,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast, unit }) => {
         </div>
 
         {/* Forecast Cards */}
-        <div className="grid grid-cols-5 gap-3 mb-6">
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-3 mb-6">
           {memoizedForecast.map((hour, index) => {
             return (
               <div
@@ -107,7 +107,7 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast, unit }) => {
 
                 {/* Time */}
                 <div className="text-center mb-3">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">
+                  <p className="text-sm font-bold text-gray-900">
                     {hour.time}
                   </p>
                 </div>
@@ -118,16 +118,16 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast, unit }) => {
                 </div>
 
                 {/* Weather Condition */}
-                <p className="text-xs text-center text-gray-600 dark:text-gray-400 font-medium mb-3 capitalize">
+                <p className="text-xs text-center text-gray-600 font-medium mb-3 capitalize">
                   {hour.weather}
                 </p>
 
                 {/* Temperature */}
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <div className="text-2xl font-bold text-gray-900">
                     {Math.round(hour.temperature)}°
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-gray-500">
                     {unit === 'metric' ? 'Celsius' : 'Fahrenheit'}
                   </div>
                 </div>

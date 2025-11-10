@@ -1,6 +1,5 @@
-import { City, WeatherData } from '@/types/weather';
+import { City, WeatherData, WeatherForecastData } from '@/types/weather';
 import axios, { AxiosInstance } from 'axios'
-import { error } from 'console';
 
 // API Configuration: API key and base URL for OpenWeatherMap
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
@@ -14,6 +13,7 @@ const cityCache = new Map<string, { data: City[]; timestamp: number }>();
 // Request deduplication: track in-flight requests to avoid duplicate network calls for the same resource
 const pendingWeatherRequests = new Map<string, Promise<WeatherData>>();
 const pendingCityRequests = new Map<string, Promise<City[]>>();
+const pendingForecastRequests = new Map<string, Promise<WeatherForecastData>>();
 
 
 // Create an axios instance with common config 
@@ -110,6 +110,48 @@ export class WeatherAPI {
         } catch (error) {
             pendingWeatherRequests.delete(cacheKey);
             throw this.handleError(error);
+        }
+    }
+
+    async fetch5DayForecast(
+        lat: number, 
+        lon: number, 
+        signal?: AbortSignal,
+    ): Promise<WeatherForecastData> {
+        const cacheKey = `forecast-${lat}-${lon}`;
+
+        // Check cache first
+        const cached = weatherCache.get(cacheKey);
+        if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+            return cached.data;
+        }
+
+        // Check for pending request
+        if (pendingForecastRequests.has(cacheKey)) {
+            return pendingForecastRequests.get(cacheKey)!;
+        }
+
+        const request = this.api
+            .get('/forecast', {
+                params: { lat, lon, appid: API_KEY },
+                signal,
+            })
+            .then((response) => {
+                const data: WeatherForecastData = {
+                    forecast: response.data,
+                };
+
+                return data;
+            });
+        pendingForecastRequests.set(cacheKey, request);
+
+        try {
+            const result = await request;
+            pendingForecastRequests.delete(cacheKey);
+            return result;
+        } catch (error) {
+            pendingForecastRequests.delete(cacheKey);
+            throw error;
         }
     }
 

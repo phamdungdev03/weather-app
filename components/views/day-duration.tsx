@@ -4,7 +4,7 @@ import { Sunrise, Sunset, Sun, Clock } from 'lucide-react';
 
 // Mock Card components
 const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`rounded-2xl bg-white dark:bg-gray-800 shadow-lg ${className}`}>
+  <div className={`rounded-2xl bg-white shadow-lg ${className}`}>
     {children}
   </div>
 );
@@ -50,7 +50,7 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-gray-800 px-3 py-2 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+        <div className="bg-white px-3 py-2 rounded-lg shadow-lg border border-gray-200">
           <p className="text-sm font-medium">
             {new Date(payload[0].payload.time).toLocaleTimeString([], {
               hour: '2-digit',
@@ -66,7 +66,7 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
   return (
     <Card className="w-full h-full relative overflow-hidden">
       {/* Decorative background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20 opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 opacity-50" />
       
       <div className="relative z-10 p-6">
         {/* Header */}
@@ -79,7 +79,7 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
               Daylight Hours
             </h2>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 ml-12">
+          <p className="text-sm text-gray-600 ml-12">
             Track the day's light cycle and solar patterns
           </p>
         </div>
@@ -87,9 +87,9 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
         <CardContent className="space-y-6">
           {/* Daylight duration badge */}
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-full border border-amber-200 dark:border-amber-800">
-              <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-              <span className="text-sm font-semibold text-amber-900 dark:text-amber-100">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-amber-200">
+              <Clock className="h-4 w-4 text-amber-600" />
+              <span className="text-sm font-semibold text-amber-900">
                 {hours}h {minutes}m of daylight
               </span>
             </div>
@@ -143,16 +143,16 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
           {/* Sunrise & Sunset info */}
           <div className="grid grid-cols-2 gap-4">
             {/* Sunrise */}
-            <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-xl p-4 border border-orange-200 dark:border-orange-800">
+            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-200">
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-orange-100 dark:bg-orange-900/50 rounded-lg">
-                  <Sunrise className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <Sunrise className="h-5 w-5 text-orange-600" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  <p className="text-xs text-gray-600 font-medium">
                     Sunrise
                   </p>
-                  <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  <p className="text-lg font-bold text-gray-900">
                     {formatTime(data.sys.sunrise)}
                   </p>
                 </div>
@@ -160,16 +160,16 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
             </div>
 
             {/* Sunset */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 border border-purple-200">
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-purple-100 dark:bg-purple-900/50 rounded-lg">
-                  <Sunset className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <Sunset className="h-5 w-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  <p className="text-xs text-gray-600 font-medium">
                     Sunset
                   </p>
-                  <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  <p className="text-lg font-bold text-gray-900">
                     {formatTime(data.sys.sunset)}
                   </p>
                 </div>
@@ -179,7 +179,7 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
 
           {/* Progress bar showing current time */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex justify-between text-xs text-gray-500">
               <span>Day Progress</span>
               <span>
                 {(() => {
@@ -189,7 +189,7 @@ const DayDuration: React.FC<DayDurationProps> = ({ data }) => {
                 })()}%
               </span>
             </div>
-            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-400 rounded-full transition-all duration-500"
                 style={{

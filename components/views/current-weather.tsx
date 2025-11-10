@@ -72,32 +72,32 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
-              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <div className="p-2 bg-blue-50 rounded-xl">
+              <MapPin className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-bold text-gray-900">
                 {currentWeather.name}
               </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-500">
                 {currentWeather.sys.country}
               </p>
             </div>
           </div>
           
           <div className="text-right space-y-1">
-            <div className="flex items-center gap-1.5 justify-end text-blue-600 dark:text-blue-400">
+            <div className="flex items-center gap-1.5 justify-end text-blue-600">
               <Calendar className="w-4 h-4" />
               <span className="text-sm font-semibold">Today</span>
             </div>
-            <div className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            <div className="text-sm font-medium text-gray-600">
                 {new Date().toLocaleDateString('en-US', {
                     weekday: 'long',
                     month: 'short',
                     day: 'numeric',
                 })}
             </div>
-            <div className="flex items-center gap-1.5 justify-end text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-1.5 justify-end text-gray-500">
               <Clock className="w-3.5 h-3.5" />
               <span className="text-xs">
                 {new Date().toLocaleTimeString('en-US', {
@@ -113,19 +113,19 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
         <div className="flex items-center justify-between mb-8">
           <div className="space-y-2">
             <div className="flex items-baseline gap-1">
-              <span className="text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <span className="text-6xl font-bold tracking-tight text-gray-900">
                 {Math.round(currentWeather.main.temp)}°
               </span>
-              <span className="text-2xl font-semibold text-gray-600 dark:text-gray-400">
+              <span className="text-2xl font-semibold text-gray-600">
                 {unit === 'metric' ? 'C' : 'F'}
               </span>
             </div>
             
             <div>
-              <p className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+              <p className="text-xl font-semibold text-gray-700">
                 {currentWeather.weather[0].main}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-1">
                 Feels like {Math.round(currentWeather.main.feels_like)}°
                 {unit === 'metric' ? 'C' : 'F'}
               </p>
@@ -140,32 +140,32 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
 
         {/* Weather details grid */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 transition-transform hover:scale-105">
+          <div className="bg-blue-50 rounded-xl p-4 transition-transform hover:scale-105">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-800/50 rounded-lg">
-                <Droplets className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <Droplets className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                <div className="text-xs text-gray-600 font-medium">
                   Humidity
                 </div>
-                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="text-lg font-bold text-gray-900">
                   {currentWeather.main.humidity}%
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 transition-transform hover:scale-105">
+          <div className="bg-green-50 rounded-xl p-4 transition-transform hover:scale-105">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 dark:bg-green-800/50 rounded-lg">
-                <Wind className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Wind className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                <div className="text-xs text-gray-600 font-medium">
                   Wind Speed
                 </div>
-                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="text-lg font-bold text-gray-900">
                   {Math.round(currentWeather.wind.speed)}{' '}
                   <span className="text-sm font-normal">
                     {unit === 'metric' ? 'km/h' : 'mph'}
@@ -175,16 +175,16 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
             </div>
           </div>
 
-          <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 transition-transform hover:scale-105">
+          <div className="bg-purple-50 rounded-xl p-4 transition-transform hover:scale-105">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-800/50 rounded-lg">
-                <Eye className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <Eye className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                <div className="text-xs text-gray-600 font-medium">
                   Visibility
                 </div>
-                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="text-lg font-bold text-gray-900">
                   {Math.round(currentWeather.visibility / 1000)}{' '}
                   <span className="text-sm font-normal">km</span>
                 </div>
@@ -192,16 +192,16 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
             </div>
           </div>
 
-          <div className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 transition-transform hover:scale-105">
+          <div className="bg-cyan-50 rounded-xl p-4 transition-transform hover:scale-105">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-cyan-100 dark:bg-cyan-800/50 rounded-lg">
-                <CloudRain className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+              <div className="p-2 bg-cyan-100 rounded-lg">
+                <CloudRain className="w-5 h-5 text-cyan-600" />
               </div>
               <div>
-                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                <div className="text-xs text-gray-600 font-medium">
                   Rain Chance
                 </div>
-                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="text-lg font-bold text-gray-900">
                   {Math.round(forecast.list[0].pop * 100)}%
                 </div>
               </div>
@@ -210,13 +210,13 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
         </div>
 
         {/* High/Low temperature */}
-        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 space-y-3">
+        <div className="bg-gray-50 rounded-xl p-4 space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+            <span className="text-sm text-gray-600 font-medium">
               Today's High
             </span>
             <div className="flex items-baseline gap-1">
-              <span className="font-bold text-red-500 dark:text-red-400">
+              <span className="font-bold text-red-500">
                 {(currentWeather.main.temp_max)}°
               </span>
               <span className="text-sm text-gray-500">
@@ -225,14 +225,14 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardsProps> = ({
             </div>
           </div>
           
-          <div className="h-px bg-gray-200 dark:bg-gray-700" />
+          <div className="h-px bg-gray-200" />
           
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+            <span className="text-sm text-gray-600 font-medium">
               Today's Low
             </span>
             <div className="flex items-baseline gap-1">
-              <span className="font-bold text-blue-500 dark:text-blue-400">
+              <span className="font-bold text-blue-500">
                 {(currentWeather.main.temp_min)}°
               </span>
               <span className="text-sm text-gray-500">

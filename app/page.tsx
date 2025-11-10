@@ -10,6 +10,7 @@ import { useWeatherStore } from "@/lib/store";
 import LocationPermissionDialog from "@/components/views/location-dialog";
 import { ErrorFallback } from "@/components/error-fallback"
 import { ErrorBoundary } from 'react-error-boundary';
+import { useOptimizedForecast } from "@/hooks/useOptimizedForecast";
 
 export default function Home() {
   const unit = 'metric' as const; // unit of measurement - đơn vị đo
@@ -24,6 +25,7 @@ export default function Home() {
   } = useWeatherStore();
 
   const { weatherData, error, isLoading } = useOptimizedWeather();
+  const { weatherForecastData } = useOptimizedForecast();
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   // Show skeleton while loading weather data
@@ -74,6 +76,7 @@ export default function Home() {
           </motion.div>
         ) : (
           weatherData &&
+          weatherForecastData &&
           !isLoading && (
             <motion.div
               key="dashboard"
@@ -84,7 +87,7 @@ export default function Home() {
               className="flex-1"
             >
               <Suspense fallback={<WeatherDashboardSkeleton />}>
-                <WeatherDashboard weatherData={weatherData} unit={unit} />
+                <WeatherDashboard weatherData={weatherData} weatherForeCastData={weatherForecastData} unit={unit} />
               </Suspense>
             </motion.div>
           )

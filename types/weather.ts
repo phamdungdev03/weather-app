@@ -128,6 +128,10 @@ export interface WeatherData {
   airPollution: AirPollutionResponse; // Data quality of air - dữ liệu chất lượng không khí
 }
 
+export interface WeatherForecastData {
+  forecast: any; // Forecast data - dữ liệu dự báo
+}
+
 export interface City {
   name: string; // City name - tên thành phố
   country: string; // Country code - mã quốc gia
